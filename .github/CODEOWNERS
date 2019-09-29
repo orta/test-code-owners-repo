@@ -1,1 +1,1 @@
-root-codeowners @two
+root-codeowners/**/*.js @two

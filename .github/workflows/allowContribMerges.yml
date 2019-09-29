@@ -1,0 +1,17 @@
+name: "Let contributors merge"
+on: [pull_request]
+
+jobs:
+  build:
+    name: "Builds and Deploys"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+      
+      - name: "Allow code-owners to merge on a review if they own everything"
+        if: 'contains(["COLLABORATOR", "OWNER", "MEMBER"], github.event.review.author_association)'
+        uses: orta/code-organizer-merge-on-green@master
+
+
